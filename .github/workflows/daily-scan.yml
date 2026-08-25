@@ -1,3 +1,20 @@
+name: Daily rotator cuff outlier scan
+
+on:
+  schedule:
+    - cron: "0 10 * * *"
+    - cron: "0 11 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   scan:
     runs-on: ubuntu-latest
