@@ -73,15 +73,16 @@ jobs:
 
       - name: Send failure email
         if: failure()
-        uses: dawidd6/action-send-mail@v6
+        uses: hilarion5/send-mail@v1
         with:
-          server_address: ${{ secrets.SMTP_HOST }}
-          server_port: ${{ secrets.SMTP_PORT }}
-          username: ${{ secrets.SMTP_USERNAME }}
-          password: ${{ secrets.SMTP_PASSWORD }}
+          smtp-server: ${{ secrets.SMTP_HOST }}
+          smtp-port: ${{ secrets.SMTP_PORT }}
+          smtp-secure: false
+          smtp-username: ${{ secrets.SMTP_USERNAME }}
+          smtp-password: ${{ secrets.SMTP_PASSWORD }}
+          from-email: ${{ secrets.ALERT_EMAIL_FROM }}
+          to-email: ${{ secrets.ALERT_EMAIL_TO }}
           subject: "❌ daily-scan failed in pt-outlier-dashboard"
-          to: ${{ secrets.ALERT_EMAIL_TO }}
-          from: ${{ secrets.ALERT_EMAIL_FROM }}
           body: |
             Repository: ${{ github.repository }}
             Workflow: ${{ github.workflow }}
@@ -92,15 +93,16 @@ jobs:
 
       - name: Send non-failure email (success or skipped)
         if: always() && !failure()
-        uses: dawidd6/action-send-mail@v6
+        uses: hilarion5/send-mail@v1
         with:
-          server_address: ${{ secrets.SMTP_HOST }}
-          server_port: ${{ secrets.SMTP_PORT }}
-          username: ${{ secrets.SMTP_USERNAME }}
-          password: ${{ secrets.SMTP_PASSWORD }}
+          smtp-server: ${{ secrets.SMTP_HOST }}
+          smtp-port: ${{ secrets.SMTP_PORT }}
+          smtp-secure: false
+          smtp-username: ${{ secrets.SMTP_USERNAME }}
+          smtp-password: ${{ secrets.SMTP_PASSWORD }}
+          from-email: ${{ secrets.ALERT_EMAIL_FROM }}
+          to-email: ${{ secrets.ALERT_EMAIL_TO }}
           subject: "✅ daily-scan completed (success or skipped) in pt-outlier-dashboard"
-          to: ${{ secrets.ALERT_EMAIL_TO }}
-          from: ${{ secrets.ALERT_EMAIL_FROM }}
           body: |
             Repository: ${{ github.repository }}
             Workflow: ${{ github.workflow }}
