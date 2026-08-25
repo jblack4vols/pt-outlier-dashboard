@@ -1,0 +1,58 @@
+{
+  "generated_at": "2026-08-25T10:00:00Z",
+  "next_run": "2026-08-26T10:00:00Z",
+  "channels_scanned": 12,
+  "outliers": [
+    {
+      "video_title": "I Was Told 12 Weeks. It Took Me 9 Months. (Rotator Cuff Truth)",
+      "video_url": "https://www.youtube.com/watch?v=example1",
+      "channel_name": "Recovery With Dana",
+      "channel_url": "https://www.youtube.com/@example1",
+      "subscriber_count": 6200,
+      "views": 214000,
+      "channel_baseline_views": 18000,
+      "multiplier": 11.9,
+      "published_at": "2026-08-09",
+      "days_since_posted": 16,
+      "trigger": "timeline anxiety",
+      "why_it_worked": "The title contradicts the standard '12 week' recovery number every surgeon quotes, which is the exact number every viewer googled the night before surgery. It reads as a warning, not a complaint, so it doesn't feel like clickbait.",
+      "trend_or_evergreen": "evergreen",
+      "rewritten_title": "They Said 12 Weeks. My Rotator Cuff Took 9 Months.",
+      "rewritten_hook": "Open on the surgeon's discharge paperwork with '12 weeks' circled, then cut to a calendar with 9 months crossed off. Say the number out loud before any b-roll of exercises."
+    },
+    {
+      "video_title": "Sleeping After Shoulder Surgery Ruined My Recovery (Do This Instead)",
+      "video_url": "https://www.youtube.com/watch?v=example2",
+      "channel_name": "PT Corner",
+      "channel_url": "https://www.youtube.com/@example2",
+      "subscriber_count": 41000,
+      "views": 380000,
+      "channel_baseline_views": 62000,
+      "multiplier": 6.1,
+      "published_at": "2026-08-14",
+      "days_since_posted": 11,
+      "trigger": "fear of re-injury",
+      "why_it_worked": "Sleep is the one part of recovery nobody warns you about, and 'ruined my recovery' implies a mistake the viewer might already be making tonight. It's the highest-urgency angle in the niche because it applies every single night, not just during PT sessions.",
+      "trend_or_evergreen": "evergreen",
+      "rewritten_title": "How I Was Sleeping Wrong After Rotator Cuff Surgery (Nobody Told Me)",
+      "rewritten_hook": "Show the recliner-versus-bed setup in the first 3 seconds, then say the pillow angle mistake before explaining why."
+    },
+    {
+      "video_title": "6 Months Post-Op Rotator Cuff: What My MRI Actually Showed",
+      "video_url": "https://www.youtube.com/watch?v=example3",
+      "channel_name": "Shoulder Journey",
+      "channel_url": "https://www.youtube.com/@example3",
+      "subscriber_count": 3100,
+      "views": 61000,
+      "channel_baseline_views": 5400,
+      "multiplier": 11.3,
+      "published_at": "2026-08-05",
+      "days_since_posted": 20,
+      "trigger": "money proof / hard evidence",
+      "why_it_worked": "MRI footage is proof nobody else shows. Most channels talk about pain and range of motion; this one has an imaging result on screen, which reads as credible in a niche full of unverifiable pain claims.",
+      "trend_or_evergreen": "evergreen",
+      "rewritten_title": "6 Months Post-Op: My MRI Results (Full Tear vs. Repair)",
+      "rewritten_hook": "Cut straight to the MRI viewer on screen before any talking-head intro. Circle the repair site with a red marker on frame one."
+    }
+  ]
+}

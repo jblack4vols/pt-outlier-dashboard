@@ -1,0 +1,73 @@
+name: Daily rotator cuff outlier scan
+
+on:
+  schedule:
+    # Runs at both 10:00 and 11:00 UTC so 6am Eastern is covered across the
+    # DST switch (EDT = UTC-4, EST = UTC-5). The "skip if not 6am ET" step
+    # below stops the wrong one of the two from actually running.
+    - cron: "0 10 * * *"
+    - cron: "0 11 * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Skip run unless it is 6am Eastern
+        run: |
+          hour_et=$(TZ="America/New_York" date +%H)
+          if [ "$hour_et" != "06" ]; then
+            echo "Current hour in America/New_York is $hour_et, not 06. Skipping this trigger."
+            echo "SKIP=true" >> "$GITHUB_ENV"
+          fi
+
+      - uses: actions/checkout@v4
+        if: env.SKIP != 'true'
+
+      - uses: actions/setup-python@v5
+        if: env.SKIP != 'true'
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        if: env.SKIP != 'true'
+        run: pip install -r requirements.txt
+
+      - name: Run the scan
+        if: env.SKIP != 'true'
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/scan_channels.py
+
+      - name: Commit updated data
+        if: env.SKIP != 'true'
+        run: |
+          git config user.name "pt-outlier-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/outliers.json data/channels_seen.json
+          git diff --staged --quiet || git commit -m "Daily outlier scan: $(date -u +%Y-%m-%d)"
+          git push
+
+      - name: Setup Pages
+        if: env.SKIP != 'true'
+        uses: actions/configure-pages@v5
+
+      - name: Upload dashboard artifact
+        if: env.SKIP != 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        if: env.SKIP != 'true'
+        uses: actions/deploy-pages@v4

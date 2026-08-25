@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rotator Cuff Channel — Outlier Scan</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@600;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --bg:#10161C;
+    --surface:#1B242D;
+    --surface-2:#212B35;
+    --line:#2A3743;
+    --text:#E7E3D8;
+    --text-dim:#9AA3AC;
+    --steel:#6B7684;
+    --flare:#F5A623;
+    --flare-dim:#7A5A1E;
+    --evergreen:#2ECC8F;
+    --trend:#5AA9E6;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+
+  .wrap{max-width:920px;margin:0 auto;padding:48px 24px 96px;}
+
+  header.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:28px;
+    margin-bottom:36px;
+    flex-wrap:wrap;
+  }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--flare);
+    margin:0 0 10px;
+  }
+
+  h1{
+    font-family:'Archivo Expanded',sans-serif;
+    font-weight:800;
+    font-size:32px;
+    line-height:1.1;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  .meta{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--text-dim);
+    text-align:right;
+    line-height:1.6;
+  }
+  .meta strong{color:var(--text);}
+
+  .status-row{
+    display:flex;
+    gap:18px;
+    margin-bottom:32px;
+    flex-wrap:wrap;
+  }
+  .stat{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    color:var(--text-dim);
+  }
+  .stat b{
+    color:var(--text);
+    font-size:20px;
+    font-weight:500;
+    display:block;
+    font-family:'Archivo Expanded',sans-serif;
+  }
+
+  #list{display:flex;flex-direction:column;gap:14px;}
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:22px 24px;
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before{
+    content:'';
+    position:absolute;
+    left:0;top:0;bottom:0;
+    width:3px;
+    background:var(--flare);
+  }
+
+  .rank-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:16px;
+    margin-bottom:10px;
+  }
+
+  .rank{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--flare);
+    letter-spacing:0.08em;
+  }
+
+  .multiplier{
+    font-family:'Archivo Expanded',sans-serif;
+    font-weight:800;
+    font-size:22px;
+    color:var(--flare);
+    white-space:nowrap;
+  }
+  .multiplier span{
+    font-size:13px;
+    font-weight:500;
+    color:var(--text-dim);
+    font-family:'Inter',sans-serif;
+  }
+
+  .video-title{
+    font-size:18px;
+    font-weight:600;
+    margin:0 0 4px;
+    line-height:1.35;
+  }
+  .video-title a{color:var(--text);text-decoration:none;}
+  .video-title a:hover{color:var(--flare);}
+
+  .channel-line{
+    font-size:13px;
+    color:var(--text-dim);
+    margin-bottom:16px;
+  }
+  .channel-line a{color:var(--text-dim);}
+  .channel-line b{color:var(--text);font-weight:500;}
+
+  .bar-block{margin-bottom:16px;}
+  .bar-row{
+    display:grid;
+    grid-template-columns:96px 1fr 90px;
+    align-items:center;
+    gap:10px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--text-dim);
+    margin-bottom:6px;
+  }
+  .bar-track{
+    height:8px;
+    background:var(--surface-2);
+    border-radius:2px;
+    overflow:hidden;
+  }
+  .bar-fill{
+    height:100%;
+    border-radius:2px;
+  }
+  .bar-fill.baseline{background:var(--steel);}
+  .bar-fill.actual{background:var(--flare);}
+  .bar-value{text-align:right;color:var(--text);}
+
+  .tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+  .tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.04em;
+    padding:3px 9px;
+    border-radius:100px;
+    border:1px solid var(--line);
+    color:var(--text-dim);
+    text-transform:uppercase;
+  }
+  .tag.trend-evergreen{color:var(--evergreen);border-color:var(--evergreen);}
+  .tag.trend-trend{color:var(--trend);border-color:var(--trend);}
+
+  .breakdown{font-size:14px;line-height:1.6;color:var(--text);margin:0 0 16px;}
+  .breakdown b{color:var(--flare-dim);color:var(--flare);font-weight:600;}
+
+  .rewrite{
+    background:var(--surface-2);
+    border-radius:4px;
+    padding:16px 18px;
+  }
+  .rewrite-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--steel);
+    margin:0 0 8px;
+  }
+  .rewrite-title{font-size:15px;font-weight:600;margin:0 0 6px;}
+  .rewrite-hook{font-size:13px;color:var(--text-dim);margin:0;line-height:1.5;}
+
+  .empty{
+    text-align:center;
+    padding:80px 20px;
+    color:var(--text-dim);
+    font-family:'IBM Plex Mono',monospace;
+  }
+
+  footer{
+    margin-top:48px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--steel);
+  }
+
+  @media (max-width:640px){
+    h1{font-size:24px;}
+    header.top{flex-direction:column;align-items:flex-start;}
+    .meta{text-align:left;}
+    .bar-row{grid-template-columns:70px 1fr 70px;font-size:11px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <p class="eyebrow">Daily scan · shoulder recovery niche</p>
+      <h1>Outlier Report</h1>
+    </div>
+    <div class="meta" id="meta">Loading…</div>
+  </header>
+
+  <div class="status-row" id="statusRow"></div>
+
+  <div id="list"></div>
+
+  <footer>Runs automatically every morning at 6am ET · scans 10-15 channels under 100k subs · flags anything 3x+ its channel's own baseline</footer>
+</div>
+
+<script>
+async function load() {
+  const listEl = document.getElementById('list');
+  const metaEl = document.getElementById('meta');
+  const statusEl = document.getElementById('statusRow');
+
+  let data;
+  try {
+    const res = await fetch('data/outliers.json', {cache: 'no-store'});
+    data = await res.json();
+  } catch (e) {
+    listEl.innerHTML = '<div class="empty">Could not load data/outliers.json</div>';
+    return;
+  }
+
+  const generated = new Date(data.generated_at);
+  metaEl.innerHTML = `Last scan<br><strong>${generated.toLocaleString('en-US', {dateStyle:'medium', timeStyle:'short'})}</strong>`;
+
+  statusEl.innerHTML = `
+    <div class="stat"><b>${data.channels_scanned ?? '—'}</b>channels scanned</div>
+    <div class="stat"><b>${data.outliers.length}</b>outliers flagged</div>
+    <div class="stat"><b>3x</b>minimum multiplier</div>
+  `;
+
+  if (!data.outliers.length) {
+    listEl.innerHTML = '<div class="empty">No outliers cleared 3x this run. Check back tomorrow.</div>';
+    return;
+  }
+
+  listEl.innerHTML = data.outliers.map((o, i) => {
+    const maxBar = Math.max(o.views, o.channel_baseline_views);
+    const baselinePct = Math.max(4, (o.channel_baseline_views / maxBar) * 100);
+    const actualPct = Math.max(4, (o.views / maxBar) * 100);
+    const trendClass = (o.trend_or_evergreen || '').toLowerCase().startsWith('evergreen') ? 'trend-evergreen' : 'trend-trend';
+
+    return `
+    <div class="card">
+      <div class="rank-row">
+        <span class="rank">#${i + 1}</span>
+        <span class="multiplier">${o.multiplier}x <span>baseline</span></span>
+      </div>
+      <p class="video-title"><a href="${o.video_url}" target="_blank" rel="noopener">${o.video_title}</a></p>
+      <p class="channel-line">
+        <a href="${o.channel_url}" target="_blank" rel="noopener"><b>${o.channel_name}</b></a>
+        · ${o.subscriber_count.toLocaleString()} subs · posted ${o.days_since_posted}d ago
+      </p>
+
+      <div class="bar-block">
+        <div class="bar-row">
+          <span>baseline</span>
+          <div class="bar-track"><div class="bar-fill baseline" style="width:${baselinePct}%"></div></div>
+          <span class="bar-value">${o.channel_baseline_views.toLocaleString()}</span>
+        </div>
+        <div class="bar-row">
+          <span>this video</span>
+          <div class="bar-track"><div class="bar-fill actual" style="width:${actualPct}%"></div></div>
+          <span class="bar-value">${o.views.toLocaleString()}</span>
+        </div>
+      </div>
+
+      <div class="tags">
+        <span class="tag">${o.trigger || 'trigger tbd'}</span>
+        <span class="tag ${trendClass}">${o.trend_or_evergreen || ''}</span>
+      </div>
+
+      <p class="breakdown">${o.why_it_worked || ''}</p>
+
+      <div class="rewrite">
+        <p class="rewrite-label">Rewritten for the rotator cuff channel</p>
+        <p class="rewrite-title">${o.rewritten_title || ''}</p>
+        <p class="rewrite-hook">${o.rewritten_hook || ''}</p>
+      </div>
+    </div>
+    `;
+  }).join('');
+}
+
+load();
+</script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+{
+  "note": "Channel IDs scanned in the last 4 weeks, keyed by the week they were first used. The scan script reads this to avoid recycling the same list and prunes entries older than 4 weeks automatically.",
+  "weeks": {}
+}
