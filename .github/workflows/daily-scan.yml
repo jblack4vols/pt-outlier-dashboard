@@ -2,9 +2,10 @@ name: Daily rotator cuff outlier scan
 
 on:
   schedule:
-    # Runs at both 10:00 and 11:00 UTC so 6am Eastern is covered across DST
-    - cron: "0 10 * * *"
-    - cron: "0 11 * * *"
+    # 2:00 AM America/New_York year-round:
+    # EST (UTC-5) => 07:00 UTC, EDT (UTC-4) => 06:00 UTC
+    - cron: "0 6 * * *"
+    - cron: "0 7 * * *"
   workflow_dispatch: {}
 
 permissions:
@@ -20,11 +21,11 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
-      - name: Skip run unless it is 6am Eastern
+      - name: Skip run unless it is 2am Eastern
         run: |
           hour_et=$(TZ="America/New_York" date +%H)
-          if [ "$hour_et" != "06" ]; then
-            echo "Current hour in America/New_York is $hour_et, not 06. Skipping this trigger."
+          if [ "$hour_et" != "02" ]; then
+            echo "Current hour in America/New_York is $hour_et, not 02. Skipping this trigger."
             echo "SKIP=true" >> "$GITHUB_ENV"
           fi
 
@@ -86,17 +87,18 @@ jobs:
             Workflow: ${{ github.workflow }}
             Job: ${{ github.job }}
             Branch: ${{ github.ref_name }}
+            Status: FAILED
             Run URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
-      - name: Send success email
-        if: success() && env.SKIP != 'true'
+      - name: Send non-failure email (success or skipped)
+        if: always() && !failure()
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: ${{ secrets.SMTP_HOST }}
           server_port: ${{ secrets.SMTP_PORT }}
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
-          subject: "✅ daily-scan succeeded in pt-outlier-dashboard"
+          subject: "✅ daily-scan completed (success or skipped) in pt-outlier-dashboard"
           to: ${{ secrets.ALERT_EMAIL_TO }}
           from: ${{ secrets.ALERT_EMAIL_FROM }}
           body: |
@@ -104,4 +106,5 @@ jobs:
             Workflow: ${{ github.workflow }}
             Job: ${{ github.job }}
             Branch: ${{ github.ref_name }}
+            Skip flag: ${{ env.SKIP }}
             Run URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
