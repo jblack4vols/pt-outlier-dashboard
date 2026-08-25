@@ -2,6 +2,7 @@ name: Daily rotator cuff outlier scan
 
 on:
   schedule:
+    # Runs at both 10:00 and 11:00 UTC so 6am Eastern is covered across DST
     - cron: "0 10 * * *"
     - cron: "0 11 * * *"
   workflow_dispatch: {}
@@ -69,13 +70,6 @@ jobs:
         if: env.SKIP != 'true'
         uses: actions/deploy-pages@v4
 
-      # TEMP: test email alert once, then remove
-      - name: Intentional failure (test alert)
-        if: env.SKIP != 'true'
-        run: |
-          echo "Testing failure email"
-          exit 1
-
       - name: Send failure email
         if: failure()
         uses: dawidd6/action-send-mail@v3
@@ -85,6 +79,24 @@ jobs:
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
           subject: "❌ daily-scan failed in pt-outlier-dashboard"
+          to: ${{ secrets.ALERT_EMAIL_TO }}
+          from: ${{ secrets.ALERT_EMAIL_FROM }}
+          body: |
+            Repository: ${{ github.repository }}
+            Workflow: ${{ github.workflow }}
+            Job: ${{ github.job }}
+            Branch: ${{ github.ref_name }}
+            Run URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+      - name: Send success email
+        if: success() && env.SKIP != 'true'
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.SMTP_HOST }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "✅ daily-scan succeeded in pt-outlier-dashboard"
           to: ${{ secrets.ALERT_EMAIL_TO }}
           from: ${{ secrets.ALERT_EMAIL_FROM }}
           body: |
