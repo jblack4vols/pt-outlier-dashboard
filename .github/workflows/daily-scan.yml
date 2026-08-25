@@ -46,7 +46,16 @@ jobs:
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python scripts/scan_channels.py
+        run: |
+          set -o pipefail
+          python scripts/scan_channels.py 2>&1 | tee scan_output.log
+
+          # Parse NEW_OUTLIERS=number from script output
+          parsed=$(grep -Eo 'NEW_OUTLIERS=[0-9]+' scan_output.log | tail -n1 | cut -d= -f2 || true)
+          if [ -z "$parsed" ]; then
+            parsed="unknown"
+          fi
+          echo "NEW_OUTLIERS=$parsed" >> "$GITHUB_ENV"
 
       - name: Commit updated data
         if: env.SKIP != 'true'
@@ -87,25 +96,32 @@ jobs:
           BRANCH: ${{ github.ref_name }}
           SKIP_FLAG: ${{ env.SKIP }}
           JOB_STATUS: ${{ job.status }}
+          NEW_OUTLIERS: ${{ env.NEW_OUTLIERS }}
         run: |
           python - << 'PY'
           import os, smtplib
           from email.mime.text import MIMEText
 
           status = os.environ.get("JOB_STATUS", "unknown").lower()
-          if status == "success":
-              subject = "✅ daily-scan succeeded in pt-outlier-dashboard"
+          skip_flag = os.environ.get("SKIP_FLAG", "")
+          new_outliers = os.environ.get("NEW_OUTLIERS", "unknown")
+
+          if skip_flag == "true":
+              subject = "⏭️ daily-scan skipped in pt-outlier-dashboard"
+          elif status == "success":
+              subject = f"✅ daily-scan succeeded | new outliers: {new_outliers}"
           elif status == "failure":
-              subject = "❌ daily-scan failed in pt-outlier-dashboard"
+              subject = f"❌ daily-scan failed | new outliers: {new_outliers}"
           else:
-              subject = f"ℹ️ daily-scan status: {status} in pt-outlier-dashboard"
+              subject = f"ℹ️ daily-scan status: {status} | new outliers: {new_outliers}"
 
           body = f"""Repository: {os.environ['REPOSITORY']}
           Workflow: {os.environ['WORKFLOW']}
           Job: {os.environ['JOB']}
           Branch: {os.environ['BRANCH']}
           Status: {status.upper()}
-          Skip flag: {os.environ.get('SKIP_FLAG', '')}
+          Skip flag: {skip_flag}
+          New outliers found: {new_outliers}
           Run URL: {os.environ['RUN_URL']}
           """
 
