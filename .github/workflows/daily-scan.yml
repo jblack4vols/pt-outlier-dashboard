@@ -71,42 +71,58 @@ jobs:
         if: env.SKIP != 'true'
         uses: actions/deploy-pages@v4
 
-      - name: Send failure email
-        if: failure()
-        uses: hilarion5/send-mail@v1
-        with:
-          smtp-server: ${{ secrets.SMTP_HOST }}
-          smtp-port: ${{ secrets.SMTP_PORT }}
-          smtp-secure: false
-          username: ${{ secrets.SMTP_USERNAME }}
-          password: ${{ secrets.SMTP_PASSWORD }}
-          from-email: ${{ secrets.ALERT_EMAIL_FROM }}
-          to-email: ${{ secrets.ALERT_EMAIL_TO }}
-          subject: "❌ daily-scan failed in pt-outlier-dashboard"
-          body: |
-            Repository: ${{ github.repository }}
-            Workflow: ${{ github.workflow }}
-            Job: ${{ github.job }}
-            Branch: ${{ github.ref_name }}
-            Status: FAILED
-            Run URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      - name: Send completion email (success, skipped, or failure)
+        if: always()
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          ALERT_EMAIL_FROM: ${{ secrets.ALERT_EMAIL_FROM }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          REPOSITORY: ${{ github.repository }}
+          WORKFLOW: ${{ github.workflow }}
+          JOB: ${{ github.job }}
+          BRANCH: ${{ github.ref_name }}
+          SKIP_FLAG: ${{ env.SKIP }}
+          JOB_STATUS: ${{ job.status }}
+        run: |
+          python - << 'PY'
+          import os, smtplib
+          from email.mime.text import MIMEText
 
-      - name: Send non-failure email (success or skipped)
-        if: always() && !failure()
-        uses: hilarion5/send-mail@v1
-        with:
-          smtp-server: ${{ secrets.SMTP_HOST }}
-          smtp-port: ${{ secrets.SMTP_PORT }}
-          smtp-secure: false
-          username: ${{ secrets.SMTP_USERNAME }}
-          password: ${{ secrets.SMTP_PASSWORD }}
-          from-email: ${{ secrets.ALERT_EMAIL_FROM }}
-          to-email: ${{ secrets.ALERT_EMAIL_TO }}
-          subject: "✅ daily-scan completed (success or skipped) in pt-outlier-dashboard"
-          body: |
-            Repository: ${{ github.repository }}
-            Workflow: ${{ github.workflow }}
-            Job: ${{ github.job }}
-            Branch: ${{ github.ref_name }}
-            Skip flag: ${{ env.SKIP }}
-            Run URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          status = os.environ.get("JOB_STATUS", "unknown").lower()
+          if status == "success":
+              subject = "✅ daily-scan succeeded in pt-outlier-dashboard"
+          elif status == "failure":
+              subject = "❌ daily-scan failed in pt-outlier-dashboard"
+          else:
+              subject = f"ℹ️ daily-scan status: {status} in pt-outlier-dashboard"
+
+          body = f"""Repository: {os.environ['REPOSITORY']}
+          Workflow: {os.environ['WORKFLOW']}
+          Job: {os.environ['JOB']}
+          Branch: {os.environ['BRANCH']}
+          Status: {status.upper()}
+          Skip flag: {os.environ.get('SKIP_FLAG', '')}
+          Run URL: {os.environ['RUN_URL']}
+          """
+
+          msg = MIMEText(body)
+          msg["Subject"] = subject
+          msg["From"] = os.environ["ALERT_EMAIL_FROM"]
+          msg["To"] = os.environ["ALERT_EMAIL_TO"]
+
+          host = os.environ["SMTP_HOST"]
+          port = int(os.environ.get("SMTP_PORT", "587"))
+          user = os.environ["SMTP_USERNAME"]
+          pwd = os.environ["SMTP_PASSWORD"]
+
+          with smtplib.SMTP(host, port, timeout=30) as s:
+              s.starttls()
+              s.login(user, pwd)
+              s.send_message(msg)
+
+          print("Email sent.")
+          PY
