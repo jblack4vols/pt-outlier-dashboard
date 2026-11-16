@@ -76,11 +76,14 @@ def load_seen() -> dict:
 
 
 def save_seen(seen: dict) -> None:
-    cutoff = datetime.now(timezone.utc) - timedelta(weeks=4)
+    # The week keys are plain calendar dates such as "2026-11-16", so compare
+    # calendar dates. Comparing a timezone-naive datetime with a
+    # timezone-aware one raises a TypeError.
+    cutoff_date = (datetime.now(timezone.utc) - timedelta(weeks=4)).date()
     pruned = {
         week: ids
         for week, ids in seen.get("weeks", {}).items()
-        if datetime.fromisoformat(week) >= cutoff
+        if datetime.fromisoformat(week).date() >= cutoff_date
     }
     seen["weeks"] = pruned
     SEEN_PATH.write_text(json.dumps(seen, indent=2))
