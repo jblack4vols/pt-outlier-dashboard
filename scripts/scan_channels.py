@@ -25,7 +25,7 @@ import json
 import os
 import statistics
 import sys
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import requests
@@ -76,11 +76,11 @@ def load_seen() -> dict:
 
 
 def save_seen(seen: dict) -> None:
-    cutoff = datetime.now(timezone.utc) - timedelta(weeks=4)
+    cutoff = datetime.now(timezone.utc).date() - timedelta(weeks=4)
     pruned = {
         week: ids
         for week, ids in seen.get("weeks", {}).items()
-        if datetime.fromisoformat(week) >= cutoff
+        if date.fromisoformat(week) >= cutoff
     }
     seen["weeks"] = pruned
     SEEN_PATH.write_text(json.dumps(seen, indent=2))
