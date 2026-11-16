@@ -1,4 +1,22 @@
 {
   "note": "Channel IDs scanned in the last 4 weeks, keyed by the week they were first used. The scan script reads this to avoid recycling the same list and prunes entries older than 4 weeks automatically.",
-  "weeks": {}
+  "weeks": {
+    "2026-11-16": [
+      "UCt5V_60m188xDvK-SA7Icgg",
+      "UCqH53-uB4x0Lxfho3HQ0sdQ",
+      "UC8BQ3dS_msudjVV9TgQr4Xg",
+      "UCcyYu3yTueyQyG_HmC85lxQ",
+      "UCVXzngU6E2r27HfUfLLskLQ",
+      "UCnUaGB4Wlj_tKW2zKdkGZxg",
+      "UC_gJKEyifhMpuPCoyxaei1A",
+      "UC6S-ek1Y3puNJnoAtPJ7U3Q",
+      "UCB_ncWLPDRN7oSFM5tY_hpA",
+      "UCf_rbWJSgelmj3JYyjqiaww",
+      "UCeRCoHxOun88WxIh5sGTOXA",
+      "UCkkeKFHG82quK_8erbLCeDg",
+      "UC-Fu0vuxW2TKVbc_RSd9Y_A",
+      "UC3-uGLzwTmgK1IcQl_D7j8Q",
+      "UCYoFrVyZF2qWZ8G_EqS_KAg"
+    ]
+  }
 }
