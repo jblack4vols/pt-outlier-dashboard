@@ -1,41 +1,24 @@
 {
-  "generated_at": "2026-11-16T19:25:03Z",
-  "next_run": "2026-11-17T19:25:03Z",
+  "generated_at": "2026-11-16T19:25:49Z",
+  "next_run": "2026-11-17T19:25:49Z",
   "channels_scanned": 15,
   "outliers": [
     {
-      "video_title": "\u200b6-Month Follow-Up After ACL Reconstruction & Meniscal Repair #shorts",
-      "video_url": "https://www.youtube.com/watch?v=xUnsJDHasI4",
-      "channel_name": "Dr. Yousef Muhammad | Knee & Shoulder Surgeon ",
-      "channel_url": "https://www.youtube.com/channel/UCB_ncWLPDRN7oSFM5tY_hpA",
-      "subscriber_count": 15,
-      "views": 1020,
-      "channel_baseline_views": 95,
-      "multiplier": 10.7,
-      "published_at": "2026-10-27",
-      "days_since_posted": 20,
+      "video_title": "Bankart Repair Rehab: 9 Exercises for Weeks 0\u20132 (Arthroscopic Shoulder Surgery)",
+      "video_url": "https://www.youtube.com/watch?v=xlmsP5LVle8",
+      "channel_name": "Ali Mohammad | physio",
+      "channel_url": "https://www.youtube.com/channel/UCUtMUBIQLG_Rvtdd2e94U3Q",
+      "subscriber_count": 45,
+      "views": 1213,
+      "channel_baseline_views": 229,
+      "multiplier": 5.3,
+      "published_at": "2026-10-16",
+      "days_since_posted": 31,
       "trigger": "timeline anxiety",
-      "why_it_worked": "The '6-Month' timestamp gives viewers a concrete milestone to benchmark their own recovery against, reducing uncertainty about how long healing actually takes. The combination of two procedures (ACL + meniscal repair) signals complexity, making the follow-up feel high-stakes and credible. People in recovery are obsessed with 'where should I be at X months' and this title answers that question directly.",
-      "trend_or_evergreen": "evergreen \u2014 ACL and meniscal injuries happen year-round and patients will always search for real-world recovery timelines regardless of when they find the video",
-      "rewritten_title": "6-Month Follow-Up After Rotator Cuff Repair Surgery #shorts",
-      "rewritten_hook": "Show yourself or your patient at the camera and say: 'Six months post rotator cuff repair \u2014 here is exactly where the shoulder is at, what still isn't back, and what finally is.'"
-    },
-    {
-      "video_title": "Still experiencing shoulder pain after a previous surgery? There is hope for full recovery! #shorts",
-      "video_url": "https://www.youtube.com/watch?v=2UNO9n5nKIk",
-      "channel_name": "Dr. Yousef Muhammad | Knee & Shoulder Surgeon ",
-      "channel_url": "https://www.youtube.com/channel/UCB_ncWLPDRN7oSFM5tY_hpA",
-      "subscriber_count": 15,
-      "views": 370,
-      "channel_baseline_views": 95,
-      "multiplier": 3.9,
-      "published_at": "2026-11-03",
-      "days_since_posted": 13,
-      "trigger": "hope after failure",
-      "why_it_worked": "The title directly addresses a painful, specific situation \u2014 someone who already tried surgery and still suffers \u2014 which filters for a highly frustrated, motivated audience. It validates their fear that they may never recover, then immediately counters it with 'there is hope for full recovery,' creating emotional relief and a reason to click. The combination of acknowledging past failure plus a credible medical source makes the promise feel trustworthy rather than hype.",
-      "trend_or_evergreen": "evergreen \u2014 failed surgeries and persistent post-op pain are a permanent, recurring experience with no seasonal dependency",
-      "rewritten_title": "Still Have Rotator Cuff Pain After Surgery? Here's Why \u2014 And How to Actually Heal",
-      "rewritten_hook": "Open by looking directly into the camera and saying: 'If your rotator cuff was supposedly fixed but it still hurts \u2014 your surgery didn't fail you, your rehab plan did. Here's what most surgeons won't tell you.'"
+      "why_it_worked": "The title gives viewers an exact protocol window (Weeks 0\u20132) which removes uncertainty during the most vulnerable and confusing phase of recovery. Specifying '9 Exercises' adds concrete proof that the video delivers a complete, actionable plan rather than vague advice. The surgical specificity ('Arthroscopic') signals clinical credibility and filters for exactly the right audience who is desperate for a roadmap right after their procedure.",
+      "trend_or_evergreen": "evergreen \u2014 shoulder surgeries happen year-round and post-op patients will always search for week-by-week guidance during recovery",
+      "rewritten_title": "Rotator Cuff Surgery Rehab: 8 Exercises for Weeks 0\u20132 (What Your PT Actually Wants You to Do)",
+      "rewritten_hook": "Show a calendar with 'Week 1 Post-Op' circled and say: 'If you just had rotator cuff surgery, these are the only exercises you should be doing right now \u2014 and most people are either doing too much or not enough.'"
     }
   ]
 }

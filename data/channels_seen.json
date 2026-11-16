@@ -2,21 +2,21 @@
   "note": "Channel IDs scanned in the last 4 weeks, keyed by the week they were first used. The scan script reads this to avoid recycling the same list and prunes entries older than 4 weeks automatically.",
   "weeks": {
     "2026-11-16": [
-      "UCt5V_60m188xDvK-SA7Icgg",
-      "UCqH53-uB4x0Lxfho3HQ0sdQ",
-      "UC8BQ3dS_msudjVV9TgQr4Xg",
-      "UCcyYu3yTueyQyG_HmC85lxQ",
-      "UCVXzngU6E2r27HfUfLLskLQ",
-      "UCnUaGB4Wlj_tKW2zKdkGZxg",
-      "UC_gJKEyifhMpuPCoyxaei1A",
-      "UC6S-ek1Y3puNJnoAtPJ7U3Q",
-      "UCB_ncWLPDRN7oSFM5tY_hpA",
-      "UCf_rbWJSgelmj3JYyjqiaww",
-      "UCeRCoHxOun88WxIh5sGTOXA",
-      "UCkkeKFHG82quK_8erbLCeDg",
-      "UC-Fu0vuxW2TKVbc_RSd9Y_A",
-      "UC3-uGLzwTmgK1IcQl_D7j8Q",
-      "UCYoFrVyZF2qWZ8G_EqS_KAg"
+      "UCUtMUBIQLG_Rvtdd2e94U3Q",
+      "UCXroZKP9bZZZk7GjWVrX_eA",
+      "UC5R6Ps90hlF5J-7v32F5Mhw",
+      "UCb3Lv8Ena6VZAWZhoC1cgFg",
+      "UCEB-sIF7o3X-5M_I1vglaLQ",
+      "UCaNwNrLMZRmDyMf8LMgYIQw",
+      "UCNLHOFN0FltR9AjrJPz1RWA",
+      "UCYapliAtCFXKFOVhc2qUSnQ",
+      "UCoZYV8tnbXQBSz45YJICO1A",
+      "UCov0K7lG2ct7c0jb-EhsXbw",
+      "UCT3sxQyZNk4mD9azkFq2kzg",
+      "UClP4i9NHEV99jtnqepeBN5A",
+      "UCvaxPYloWfIsiXJ8k5rJceQ",
+      "UC21A3zE7qxEsfTzyEsViYHQ",
+      "UCPX8Q731cnvezK3EM9_6OlA"
     ]
   }
 }
