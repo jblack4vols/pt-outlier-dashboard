@@ -337,6 +337,9 @@ def main() -> None:
     }
     OUTLIERS_PATH.write_text(json.dumps(output, indent=2))
     print(f"Wrote {len(all_outliers)} outliers from {len(channels)} channels to {OUTLIERS_PATH}")
+    # The daily-scan workflow reads this exact line to put the outlier count
+    # in the completion email subject.
+    print(f"NEW_OUTLIERS={len(all_outliers)}")
 
 
 if __name__ == "__main__":
