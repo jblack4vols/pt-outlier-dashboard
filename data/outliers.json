@@ -1,41 +1,6 @@
 {
-  "generated_at": "2026-11-16T19:32:19Z",
-  "next_run": "2026-11-17T19:32:19Z",
+  "generated_at": "2026-11-17T07:10:33Z",
+  "next_run": "2026-11-18T07:10:33Z",
   "channels_scanned": 15,
-  "outliers": [
-    {
-      "video_title": "\u200b6-Month Follow-Up After ACL Reconstruction & Meniscal Repair #shorts",
-      "video_url": "https://www.youtube.com/watch?v=xUnsJDHasI4",
-      "channel_name": "Dr. Yousef Muhammad | Knee & Shoulder Surgeon ",
-      "channel_url": "https://www.youtube.com/channel/UCB_ncWLPDRN7oSFM5tY_hpA",
-      "subscriber_count": 15,
-      "views": 1020,
-      "channel_baseline_views": 95,
-      "multiplier": 10.7,
-      "published_at": "2026-10-27",
-      "days_since_posted": 20,
-      "trigger": "timeline anxiety",
-      "why_it_worked": "The '6-Month' timestamp gives viewers a concrete milestone to benchmark their own recovery against, reducing uncertainty about how long healing actually takes. The combination of two procedures (ACL + meniscal repair) signals complexity, making the follow-up outcome feel high-stakes and credible. People in recovery are obsessively searching for proof that the timeline they're living through is normal and that there's a real endpoint.",
-      "trend_or_evergreen": "evergreen \u2014 ACL and meniscal injuries are perennial, and post-surgical milestone content never expires because new patients enter recovery every day",
-      "rewritten_title": "6-Month Follow-Up After Rotator Cuff Surgery \u2014 What Actually Healed",
-      "rewritten_hook": "Show your shoulder MRI or scar on camera and say: 'Six months post-op \u2014 here's what my rotator cuff looks like now, and what nobody told me about this stage of recovery.'"
-    },
-    {
-      "video_title": "Still experiencing shoulder pain after a previous surgery? There is hope for full recovery! #shorts",
-      "video_url": "https://www.youtube.com/watch?v=2UNO9n5nKIk",
-      "channel_name": "Dr. Yousef Muhammad | Knee & Shoulder Surgeon ",
-      "channel_url": "https://www.youtube.com/channel/UCB_ncWLPDRN7oSFM5tY_hpA",
-      "subscriber_count": 15,
-      "views": 370,
-      "channel_baseline_views": 95,
-      "multiplier": 3.9,
-      "published_at": "2026-11-03",
-      "days_since_posted": 13,
-      "trigger": "hope after failure",
-      "why_it_worked": "The title directly addresses a painful and specific frustration \u2014 having already gone through surgery and still not being better \u2014 which filters for a highly motivated, desperate-to-solve-it audience. The phrase 'there is hope' reframes their situation from hopeless to fixable, creating an emotional relief pull that is almost impossible to scroll past. It also implies the surgeon has seen this scenario and has a real answer, lending credibility without sounding salesy.",
-      "trend_or_evergreen": "evergreen \u2014 failed or incomplete surgical outcomes are a persistent problem in orthopedic recovery, and people searching for answers after a disappointing surgery do so year-round with high intent",
-      "rewritten_title": "Still in Pain After Rotator Cuff Surgery? Here's Why \u2014 And How to Actually Heal",
-      "rewritten_hook": "Open with: 'If you had rotator cuff surgery and you're still waking up with pain, you're not broken \u2014 most people are just missing this one critical step in their recovery.'"
-    }
-  ]
+  "outliers": []
 }
